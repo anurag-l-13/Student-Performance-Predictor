@@ -1,0 +1,44 @@
+.stApp {
+    background: #0f172a;
+    color: white;
+}
+
+.block-container {
+    padding-top: 2rem;
+}
+
+.hero {
+    background: linear-gradient(120deg, #312e81, #1d4ed8);
+    padding: 35px;
+    border-radius: 18px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    color: white;
+    font-size: 38px;
+}
+
+.hero p {
+    color: #dbeafe;
+    font-size: 16px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 22px;
+    border-radius: 15px;
+    border: 1px solid #334155;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: #93c5fd;
+}
+
+.stButton button {
+    background: #2563eb;
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
