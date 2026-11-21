@@ -5,15 +5,18 @@ from sections import home, predict, dashboard
 st.set_page_config(
     page_title="Student AI | Performance Predictor",
     page_icon="🎓",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
+# Load CSS
 with open("assets/style.css") as f:
     st.markdown(
         f"<style>{f.read()}</style>",
         unsafe_allow_html=True
     )
 
+# Sidebar
 st.sidebar.markdown("## 🎓 Student AI")
 st.sidebar.caption("INTELLIGENCE PLATFORM")
 st.sidebar.divider()
@@ -47,6 +50,7 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
+# Page display
 if page == "🏠 Home":
     home.show()
 
