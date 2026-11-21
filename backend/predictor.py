@@ -1,3 +1,4 @@
+
 import joblib
 import pandas as pd
 
@@ -14,4 +15,7 @@ def predict_marks(study, attendance, previous, sleep):
 
     prediction = model.predict(data)
 
-    return round(prediction[0], 2)
+    # Keep marks between 0 and 100
+    result = max(0, min(100, prediction[0]))
+
+    return round(result, 2)

@@ -1,31 +1,47 @@
-import pandas as pd
-import joblib
 
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error, r2_score
+import streamlit as st
+from backend.predictor import predict_marks
 
-df = pd.read_csv("data/students.csv")
+def show():
 
-X = df.drop("final_marks", axis=1)
-y = df["final_marks"]
+    st.title("Student Performance Prediction")
+    st.write("Enter student details to estimate academic marks.")
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+    name = st.text_input("Student Name")
 
-model = RandomForestRegressor(
-    n_estimators=100,
-    random_state=42
-)
+    study = st.number_input(
+        "Study Hours", 1.0, 10.0, 5.0
+    )
 
-model.fit(X_train, y_train)
+    attendance = st.number_input(
+        "Attendance (%)", 40, 100, 85
+    )
 
-predictions = model.predict(X_test)
+    previous = st.number_input(
+        "Previous Marks", 30.0, 100.0, 75.0
+    )
 
-print("MAE:", mean_absolute_error(y_test, predictions))
-print("R2 Score:", r2_score(y_test, predictions))
+    sleep = st.number_input(
+        "Sleep Hours", 4.0, 10.0, 7.0
+    )
 
-joblib.dump(model, "model/student_model.pkl")
+    if st.button("Predict Marks"):
 
-print("Model saved successfully!")
+        if not name.strip():
+            st.error("Please enter student name.")
+
+        else:
+            try:
+                result = predict_marks(
+                    study, attendance, previous, sleep
+                )
+
+                st.success("Prediction completed!")
+
+                st.metric(
+                    "Estimated Marks",
+                    f"{result}/100"
+                )
+
+            except Exception as e:
+                st.error(f"Prediction failed: {e}")
